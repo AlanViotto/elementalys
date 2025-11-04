@@ -1,6 +1,7 @@
         </main>
         <footer class="app-footer text-center py-3 mt-auto">
-            <small>&copy; <?= date('Y') ?> Elementalys. Sistema artesanal com carinho.</small>
+            <?php $footerTagline = trim($brandTagline); ?>
+            <small>&copy; <?= date('Y') ?> <?= htmlspecialchars($appName) ?><?= $footerTagline !== '' ? ' · ' . htmlspecialchars($footerTagline) : '' ?></small>
         </footer>
     </div>
 </div>

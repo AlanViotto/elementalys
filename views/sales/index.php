@@ -12,7 +12,7 @@ require __DIR__ . '/../layout/header.php';
         <div class="card h-100">
             <div class="card-body">
                 <h5 class="card-title">Registrar venda</h5>
-                <form method="post" action="index.php?page=sales">
+                <form method="post" action="index.php?page=sales" class="form-styled">
                     <div class="mb-3">
                         <label class="form-label" for="product_id">Produto</label>
                         <select class="form-select" id="product_id" name="product_id" required>

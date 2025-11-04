@@ -10,7 +10,9 @@ use Elementalys\Controllers\AuthController;
 use Elementalys\Controllers\CustomerController;
 use Elementalys\Controllers\DashboardController;
 use Elementalys\Controllers\ProductController;
+use Elementalys\Controllers\RecipeController;
 use Elementalys\Controllers\SaleController;
+use Elementalys\Controllers\SettingsController;
 use Elementalys\Controllers\SupplierController;
 
 autoload();
@@ -21,6 +23,8 @@ $authController = new AuthController();
 $page = $_GET['page'] ?? 'dashboard';
 $action = $_GET['action'] ?? null;
 $error = null;
+$settingsController = new SettingsController();
+$branding = $settingsController->getBranding();
 
 if ($action === 'logout') {
     $authController->logout();
@@ -52,16 +56,46 @@ try {
         case 'products':
             $productController = new ProductController();
             $supplierController = new SupplierController();
+            $recipeController = new RecipeController();
+            $productFeedback = null;
+            $categoryFeedback = null;
 
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                $productController->create($_POST);
-                header('Location: index.php?page=products&success=1');
-                exit;
+                $form = $_POST['form'] ?? 'product';
+
+                if ($form === 'category') {
+                    $categoryFeedback = $productController->createCategory($_POST);
+                } else {
+                    $productFeedback = $productController->create($_POST);
+                }
             }
 
-            $products = $productController->all();
+            $productGroups = $productController->groupedByCategory();
+            $productCategories = $productController->categories();
             $suppliers = $supplierController->all();
+            $recipes = $recipeController->forSelect();
             require __DIR__ . '/../views/products/index.php';
+            break;
+
+        case 'recipes':
+            $recipeController = new RecipeController();
+            $recipeFeedback = null;
+            $recipeCategoryFeedback = null;
+
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $form = $_POST['form'] ?? 'recipe';
+
+                if ($form === 'category') {
+                    $recipeCategoryFeedback = $recipeController->createCategory($_POST);
+                } else {
+                    $recipeFeedback = $recipeController->create($_POST);
+                }
+            }
+
+            $recipeGroups = $recipeController->groupedByCategory();
+            $recipeCategories = $recipeController->categories();
+
+            require __DIR__ . '/../views/recipes/index.php';
             break;
 
         case 'customers':
@@ -103,6 +137,26 @@ try {
             $products = $saleController->products();
             $customers = $saleController->customers();
             require __DIR__ . '/../views/sales/index.php';
+            break;
+
+        case 'settings':
+            $profileFeedback = null;
+            $brandingFeedback = null;
+            $profile = $settingsController->getUserProfile((int) ($_SESSION['user_id'] ?? 0));
+
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $form = $_POST['form'] ?? 'branding';
+
+                if ($form === 'profile') {
+                    $profileFeedback = $settingsController->updateUserProfile((int) $_SESSION['user_id'], $_POST);
+                    $profile = $settingsController->getUserProfile((int) $_SESSION['user_id']);
+                } else {
+                    $brandingFeedback = $settingsController->updateBranding($_POST);
+                    $branding = $settingsController->getBranding();
+                }
+            }
+
+            require __DIR__ . '/../views/settings/index.php';
             break;
 
         case 'dashboard':

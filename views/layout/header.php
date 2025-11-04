@@ -1,15 +1,26 @@
 <?php
-$config = require __DIR__ . '/../../config/config.php';
-$appName = $config['app']['name'];
 $pageTitle = $pageTitle ?? 'Dashboard';
 $activeMenu = $activeMenu ?? 'dashboard';
+
+$brandDefaults = [
+    'app_name' => 'Elementalys Controle',
+    'brand_tagline' => 'Velas e aromas 100% artesanais.',
+    'logo_url' => '',
+];
+
+$brand = array_merge($brandDefaults, $branding ?? []);
+$appName = $brand['app_name'];
+$brandTagline = $brand['brand_tagline'];
+$logoUrl = $brand['logo_url'];
 
 $menuItems = [
     'dashboard' => ['label' => 'Dashboard', 'icon' => 'bi-speedometer2', 'href' => 'index.php?page=dashboard'],
     'products' => ['label' => 'Produtos', 'icon' => 'bi-box-seam', 'href' => 'index.php?page=products'],
+    'recipes' => ['label' => 'Receitas', 'icon' => 'bi-journal-richtext', 'href' => 'index.php?page=recipes'],
     'sales' => ['label' => 'Vendas', 'icon' => 'bi-cart-check', 'href' => 'index.php?page=sales'],
     'customers' => ['label' => 'Clientes', 'icon' => 'bi-people', 'href' => 'index.php?page=customers'],
     'suppliers' => ['label' => 'Fornecedores', 'icon' => 'bi-truck', 'href' => 'index.php?page=suppliers'],
+    'settings' => ['label' => 'Configurações', 'icon' => 'bi-gear', 'href' => 'index.php?page=settings'],
 ];
 ?>
 <!DOCTYPE html>
@@ -26,9 +37,15 @@ $menuItems = [
 <div class="app-shell d-flex">
     <aside class="sidebar">
         <div class="sidebar-brand">
-            <div class="brand-icon"><i class="bi bi-cloud-fill"></i></div>
+            <div class="brand-icon">
+                <?php if ($logoUrl): ?>
+                    <img src="<?= htmlspecialchars($logoUrl) ?>" alt="<?= htmlspecialchars($appName) ?>" class="brand-logo">
+                <?php else: ?>
+                    <i class="bi bi-cloud-fill"></i>
+                <?php endif; ?>
+            </div>
             <div>
-                <span class="brand-subtitle">Painel de controle</span>
+                <span class="brand-subtitle"><?= htmlspecialchars($brandTagline) ?></span>
                 <span class="brand-title"><?= htmlspecialchars($appName) ?></span>
             </div>
         </div>

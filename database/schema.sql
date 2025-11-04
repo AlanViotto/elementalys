@@ -54,5 +54,5 @@ CREATE TABLE sales (
 );
 
 INSERT INTO users (name, email, password_hash)
-VALUES ('Administrador', 'admin@elementalys.com', '$2y$10$JSxFrqxbPjzvY4xXHzkwS.i50TBF28EU/yjdLBJXwKd9n3UjPwSza');
+VALUES ('Administrador', 'admin@elementalys.com', '$2y$12$SY1PnRlXwB56Xqm0Z.I7QOG9qSyde/8ijx8j7Z3WM70CjT0nWz21i');
 -- Senha padrão: admin123

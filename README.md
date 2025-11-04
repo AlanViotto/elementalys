@@ -33,6 +33,7 @@ Sistema de gestão para a Elementalys com foco em produtos artesanais como velas
    ```bash
    mysql -u seu_usuario -p elementalys < database/schema.sql
    ```
+   > **Nota:** caso você já tenha importado o banco em uma versão anterior, atualize a senha padrão com `UPDATE users SET password_hash = '$2y$12$SY1PnRlXwB56Xqm0Z.I7QOG9qSyde/8ijx8j7Z3WM70CjT0nWz21i' WHERE email = 'admin@elementalys.com';` para garantir o acesso com `admin123`.
 4. Configure as variáveis de ambiente (opcional) ou edite `config/config.php` com os dados do banco.
 5. Sirva a aplicação (por exemplo com o servidor embutido do PHP):
    ```bash

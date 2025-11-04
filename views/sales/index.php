@@ -2,11 +2,14 @@
 /** @var array $sales */
 /** @var array $products */
 /** @var array $customers */
+$pageTitle = 'Vendas';
+$activeMenu = 'sales';
 require __DIR__ . '/../layout/header.php';
 ?>
-<div class="row">
+<div class="mb-4 text-muted">Registre cada saída de estoque e acompanhe o desempenho das vendas.</div>
+<div class="row g-4">
     <div class="col-lg-4">
-        <div class="card shadow-sm border-0 mb-4">
+        <div class="card h-100">
             <div class="card-body">
                 <h5 class="card-title">Registrar venda</h5>
                 <form method="post" action="index.php?page=sales">
@@ -38,7 +41,7 @@ require __DIR__ . '/../layout/header.php';
         </div>
     </div>
     <div class="col-lg-8">
-        <div class="card shadow-sm border-0">
+        <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Histórico de vendas</h5>
                 <div class="table-responsive">

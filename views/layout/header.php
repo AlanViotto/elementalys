@@ -17,6 +17,7 @@ $menuItems = [
     'dashboard' => ['label' => 'Dashboard', 'icon' => 'bi-speedometer2', 'href' => 'index.php?page=dashboard'],
     'products' => ['label' => 'Produtos', 'icon' => 'bi-box-seam', 'href' => 'index.php?page=products'],
     'recipes' => ['label' => 'Receitas', 'icon' => 'bi-journal-richtext', 'href' => 'index.php?page=recipes'],
+    'supplies' => ['label' => 'Insumos', 'icon' => 'bi-archive', 'href' => 'index.php?page=supplies'],
     'sales' => ['label' => 'Vendas', 'icon' => 'bi-cart-check', 'href' => 'index.php?page=sales'],
     'customers' => ['label' => 'Clientes', 'icon' => 'bi-people', 'href' => 'index.php?page=customers'],
     'suppliers' => ['label' => 'Fornecedores', 'icon' => 'bi-truck', 'href' => 'index.php?page=suppliers'],

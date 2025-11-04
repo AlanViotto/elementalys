@@ -1,6 +1,7 @@
 <?php
 /** @var array $stats */
-/** @var array $lowStock */
+/** @var array $lowStockProducts */
+/** @var array $lowStockSupplies */
 $pageTitle = 'Dashboard';
 $activeMenu = 'dashboard';
 require __DIR__ . '/../layout/header.php';
@@ -42,6 +43,15 @@ require __DIR__ . '/../layout/header.php';
             </div>
         </div>
     </div>
+    <div class="col-xxl-3 col-md-6">
+        <div class="card stat-card h-100">
+            <div class="card-body">
+                <div class="stat-icon"><i class="bi bi-archive"></i></div>
+                <span class="label">Insumos cadastrados</span>
+                <p class="value mb-0"><?= $stats['supplies'] ?></p>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="row g-4">
@@ -79,6 +89,11 @@ require __DIR__ . '/../layout/header.php';
                             <span>Fornecedores</span>
                             <small>Cadastre parceiros de compra</small>
                         </a>
+                        <a class="quick-action-card" href="index.php?page=supplies">
+                            <span class="icon"><i class="bi bi-archive"></i></span>
+                            <span>Insumos</span>
+                            <small>Controle entradas e saídas</small>
+                        </a>
                         <a class="quick-action-card" href="index.php?page=recipes">
                             <span class="icon"><i class="bi bi-journal-richtext"></i></span>
                             <span>Receitas</span>
@@ -106,17 +121,33 @@ require __DIR__ . '/../layout/header.php';
                     <h2 class="card-title mb-0">Alertas de estoque</h2>
                     <span class="badge bg-danger bg-opacity-10 text-danger"><i class="bi bi-bell"></i> atenção</span>
                 </div>
-                <?php if (empty($lowStock)): ?>
-                    <p class="text-muted mb-0">Todos os produtos estão com estoque saudável.</p>
+                <?php $hasLowStock = ! empty($lowStockProducts) || ! empty($lowStockSupplies); ?>
+                <?php if (! $hasLowStock): ?>
+                    <p class="text-muted mb-0">Nenhum produto ou insumo está abaixo do mínimo.</p>
                 <?php else: ?>
-                    <ul class="list-group list-group-flush">
-                        <?php foreach ($lowStock as $item): ?>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                <span class="fw-semibold"><?= htmlspecialchars($item['name']) ?></span>
-                                <span class="badge bg-danger"><?= $item['stock_quantity'] ?> un.</span>
-                            </li>
-                        <?php endforeach; ?>
-                    </ul>
+                    <?php if (! empty($lowStockProducts)): ?>
+                        <h6 class="text-uppercase text-muted small mt-0">Produtos</h6>
+                        <ul class="list-group list-group-flush mb-3">
+                            <?php foreach ($lowStockProducts as $item): ?>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span class="fw-semibold"><?= htmlspecialchars($item['name']) ?></span>
+                                    <span class="badge bg-danger"><?= $item['stock_quantity'] ?> un.</span>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    <?php endif; ?>
+                    <?php if (! empty($lowStockSupplies)): ?>
+                        <h6 class="text-uppercase text-muted small">Insumos</h6>
+                        <ul class="list-group list-group-flush">
+                            <?php foreach ($lowStockSupplies as $supply): ?>
+                                <?php $unit = $supply['unit'] ? $supply['unit'] : 'un.'; ?>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span class="fw-semibold"><?= htmlspecialchars($supply['name']) ?></span>
+                                    <span class="badge bg-warning text-dark"><?= $supply['stock_quantity'] ?> <?= htmlspecialchars($unit) ?></span>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    <?php endif; ?>
                 <?php endif; ?>
             </div>
         </div>

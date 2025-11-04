@@ -9,8 +9,8 @@ require __DIR__ . '/../layout/header.php';
 ?>
 <div class="mb-4 text-muted">Cadastre e organize o passo a passo das suas criações artesanais para reutilizar insumos com precisão.</div>
 <div class="row g-4">
-    <div class="col-xxl-4">
-        <div class="card h-100">
+    <div class="col-xxl-8 d-flex">
+        <div class="card h-100 me-4">
             <div class="card-body">
                 <h5 class="card-title">Cadastrar nova receita</h5>
                 <p class="text-muted small">Descreva ingredientes, rendimento e tempo de preparo para orientar a produção.</p>
@@ -64,7 +64,7 @@ require __DIR__ . '/../layout/header.php';
                 </form>
             </div>
         </div>
-        <div class="card mt-4">
+        <div class="card p-4">
             <div class="card-body">
                 <h6 class="card-title">Criar categoria</h6>
                 <p class="text-muted small mb-3">Separe por família olfativa, linha temática ou finalidade.</p>
@@ -88,7 +88,7 @@ require __DIR__ . '/../layout/header.php';
             </div>
         </div>
     </div>
-    <div class="col-xxl-8">
+    <div class="col-xxl-4">
         <div class="category-board">
             <?php foreach ($recipeGroups as $group): ?>
                 <section class="card category-card" id="recipe-category-<?= $group['id'] ?>">

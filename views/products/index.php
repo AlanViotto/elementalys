@@ -11,8 +11,8 @@ require __DIR__ . '/../layout/header.php';
 ?>
 <div class="mb-4 text-muted">Mantenha seu catálogo atualizado, destacando fotos, categorias e vínculos com as receitas artesanais.</div>
 <div class="row g-4">
-    <div class="col-xxl-4">
-        <div class="card h-100">
+    <div class="col-xxl-8 d-flex">
+        <div class="card h-100 me-4">
             <div class="card-body">
                 <h5 class="card-title">Cadastrar novo produto</h5>
                 <p class="text-muted small">Preencha as informações para que o sistema calcule automaticamente o preço de venda.</p>
@@ -94,7 +94,7 @@ require __DIR__ . '/../layout/header.php';
                 </form>
             </div>
         </div>
-        <div class="card mt-4">
+        <div class="card p-4">
             <div class="card-body">
                 <h6 class="card-title">Criar categoria</h6>
                 <p class="text-muted small mb-3">Organize a vitrine em coleções por aroma, uso ou ocasião.</p>
@@ -118,7 +118,7 @@ require __DIR__ . '/../layout/header.php';
             </div>
         </div>
     </div>
-    <div class="col-xxl-8">
+    <div class="col-xxl-4">
         <div class="category-board">
             <?php foreach ($productGroups as $group): ?>
                 <section class="card category-card" id="category-<?= $group['id'] ?>">

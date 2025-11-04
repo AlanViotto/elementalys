@@ -9,6 +9,11 @@ abstract class BaseController
         return trim(filter_var($value ?? '', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
     }
 
+    protected function sanitizeEmail(?string $value): string
+    {
+        return trim(filter_var($value ?? '', FILTER_SANITIZE_EMAIL));
+    }
+
     protected function sanitizeFloat(?string $value): float
     {
         $normalized = str_replace(',', '.', $value ?? '0');

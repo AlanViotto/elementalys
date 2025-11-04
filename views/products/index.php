@@ -1,14 +1,14 @@
 <?php
 /** @var array $products */
 /** @var array $suppliers */
+$pageTitle = 'Produtos';
+$activeMenu = 'products';
 require __DIR__ . '/../layout/header.php';
 ?>
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <h1 class="h3">Produtos</h1>
-</div>
-<div class="row">
+<div class="mb-4 text-muted">Mantenha seu catálogo sempre atualizado para evitar rupturas.</div>
+<div class="row g-4">
     <div class="col-lg-4">
-        <div class="card shadow-sm border-0 mb-4">
+        <div class="card h-100">
             <div class="card-body">
                 <h5 class="card-title">Cadastrar novo produto</h5>
                 <form method="post" action="index.php?page=products">
@@ -55,7 +55,7 @@ require __DIR__ . '/../layout/header.php';
         </div>
     </div>
     <div class="col-lg-8">
-        <div class="card shadow-sm border-0">
+        <div class="card" id="low-stock-card">
             <div class="card-body">
                 <h5 class="card-title">Lista de produtos</h5>
                 <div class="table-responsive">

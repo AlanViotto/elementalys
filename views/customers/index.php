@@ -1,10 +1,13 @@
 <?php
 /** @var array $customers */
+$pageTitle = 'Clientes';
+$activeMenu = 'customers';
 require __DIR__ . '/../layout/header.php';
 ?>
-<div class="row">
+<div class="mb-4 text-muted">Cadastre clientes para acompanhar histórico de compras e contatos.</div>
+<div class="row g-4">
     <div class="col-lg-4">
-        <div class="card shadow-sm border-0 mb-4">
+        <div class="card h-100">
             <div class="card-body">
                 <h5 class="card-title">Cadastrar cliente</h5>
                 <form method="post" action="index.php?page=customers">
@@ -30,7 +33,7 @@ require __DIR__ . '/../layout/header.php';
         </div>
     </div>
     <div class="col-lg-8">
-        <div class="card shadow-sm border-0">
+        <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Clientes cadastrados</h5>
                 <div class="table-responsive">

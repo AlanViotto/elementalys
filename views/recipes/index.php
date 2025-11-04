@@ -27,7 +27,7 @@ require __DIR__ . '/../layout/header.php';
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="recipe_category_id">Categoria</label>
-                        <select class="form-select" id="recipe_category_id" name="recipe_category_id">
+                        <select class="form-select" id="recipe_category_id" name="product_category_id">
                             <option value="">Sem categoria</option>
                             <?php foreach ($recipeCategories as $category): ?>
                                 <option value="<?= $category['id'] ?>"><?= htmlspecialchars($category['name']) ?></option>

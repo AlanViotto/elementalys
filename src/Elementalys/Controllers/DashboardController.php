@@ -14,9 +14,10 @@ class DashboardController
         $recipes = (int) $pdo->query('SELECT COUNT(*) FROM recipes')->fetchColumn();
         $customers = (int) $pdo->query('SELECT COUNT(*) FROM customers')->fetchColumn();
         $suppliers = (int) $pdo->query('SELECT COUNT(*) FROM suppliers')->fetchColumn();
+        $supplies = (int) $pdo->query('SELECT COUNT(*) FROM supplies')->fetchColumn();
         $sales = (int) $pdo->query('SELECT COUNT(*) FROM sales')->fetchColumn();
         $revenue = (float) $pdo->query('SELECT IFNULL(SUM(total_price), 0) FROM sales')->fetchColumn();
 
-        return compact('products', 'recipes', 'customers', 'suppliers', 'sales', 'revenue');
+        return compact('products', 'recipes', 'customers', 'suppliers', 'supplies', 'sales', 'revenue');
     }
 }

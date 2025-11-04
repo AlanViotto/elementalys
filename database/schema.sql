@@ -32,16 +32,9 @@ CREATE TABLE product_categories (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE recipe_categories (
-    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(120) NOT NULL,
-    description TEXT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
 CREATE TABLE recipes (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    recipe_category_id INT UNSIGNED NULL,
+    product_category_id INT UNSIGNED NULL,
     name VARCHAR(150) NOT NULL,
     summary TEXT NULL,
     ingredients TEXT NULL,
@@ -50,7 +43,7 @@ CREATE TABLE recipes (
     yield_description VARCHAR(120) NULL,
     image_path VARCHAR(255) NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (recipe_category_id) REFERENCES recipe_categories(id) ON DELETE SET NULL
+    FOREIGN KEY (product_category_id) REFERENCES product_categories(id) ON DELETE SET NULL
 );
 
 CREATE TABLE products (
@@ -71,6 +64,20 @@ CREATE TABLE products (
     FOREIGN KEY (supplier_id) REFERENCES suppliers(id) ON DELETE SET NULL,
     FOREIGN KEY (product_category_id) REFERENCES product_categories(id) ON DELETE SET NULL,
     FOREIGN KEY (recipe_id) REFERENCES recipes(id) ON DELETE SET NULL
+);
+
+CREATE TABLE supplies (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    supplier_id INT UNSIGNED NULL,
+    name VARCHAR(150) NOT NULL,
+    unit VARCHAR(40) NULL,
+    stock_quantity INT NOT NULL DEFAULT 0,
+    min_stock_level INT NOT NULL DEFAULT 0,
+    cost_per_unit DECIMAL(10,2) NOT NULL DEFAULT 0.00,
+    notes TEXT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (supplier_id) REFERENCES suppliers(id) ON DELETE SET NULL
 );
 
 CREATE TABLE settings (

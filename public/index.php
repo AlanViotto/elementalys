@@ -14,6 +14,7 @@ use Elementalys\Controllers\RecipeController;
 use Elementalys\Controllers\SaleController;
 use Elementalys\Controllers\SettingsController;
 use Elementalys\Controllers\SupplierController;
+use Elementalys\Controllers\SupplyController;
 
 autoload();
 
@@ -98,6 +99,28 @@ try {
             require __DIR__ . '/../views/recipes/index.php';
             break;
 
+        case 'supplies':
+            $supplyController = new SupplyController();
+            $supplierController = new SupplierController();
+            $supplyFeedback = null;
+            $stockFeedback = null;
+
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $form = $_POST['form'] ?? 'supply';
+
+                if ($form === 'stock') {
+                    $stockFeedback = $supplyController->adjustStock($_POST);
+                } else {
+                    $supplyFeedback = $supplyController->create($_POST);
+                }
+            }
+
+            $supplies = $supplyController->all();
+            $suppliers = $supplierController->all();
+
+            require __DIR__ . '/../views/supplies/index.php';
+            break;
+
         case 'customers':
             $customerController = new CustomerController();
 
@@ -163,9 +186,11 @@ try {
         default:
             $dashboardController = new DashboardController();
             $productController = new ProductController();
+            $supplyController = new SupplyController();
 
             $stats = $dashboardController->statistics();
-            $lowStock = $productController->lowStock();
+            $lowStockProducts = $productController->lowStock();
+            $lowStockSupplies = $supplyController->lowStock();
 
             require __DIR__ . '/../views/dashboard/index.php';
             break;

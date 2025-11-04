@@ -11,7 +11,7 @@ class RecipeController extends BaseController
     {
         $pdo = Connection::getInstance();
 
-        return $pdo->query('SELECT id, name, description FROM recipe_categories ORDER BY name')->fetchAll(PDO::FETCH_ASSOC);
+        return $pdo->query('SELECT id, name, description FROM product_categories ORDER BY name')->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function createCategory(array $data): array
@@ -27,7 +27,7 @@ class RecipeController extends BaseController
         }
 
         $pdo = Connection::getInstance();
-        $statement = $pdo->prepare('INSERT INTO recipe_categories (name, description) VALUES (:name, :description)');
+        $statement = $pdo->prepare('INSERT INTO product_categories (name, description) VALUES (:name, :description)');
         $statement->execute([
             'name' => $name,
             'description' => $description,
@@ -35,7 +35,7 @@ class RecipeController extends BaseController
 
         return [
             'success' => true,
-            'message' => 'Categoria de receita criada com sucesso.',
+            'message' => 'Categoria criada e disponível para produtos e receitas.',
         ];
     }
 
@@ -48,7 +48,7 @@ class RecipeController extends BaseController
         $preparationTime = $this->sanitizeString($data['preparation_time'] ?? '');
         $yield = $this->sanitizeString($data['yield_description'] ?? '');
         $imagePath = $this->sanitizeUrl($data['image_path'] ?? '');
-        $categoryId = $this->sanitizeNullableInt($data['recipe_category_id'] ?? null);
+        $categoryId = $this->sanitizeNullableInt($data['product_category_id'] ?? null);
 
         if ($name === '' || $instructions === '') {
             return [
@@ -58,7 +58,7 @@ class RecipeController extends BaseController
         }
 
         $pdo = Connection::getInstance();
-        $statement = $pdo->prepare('INSERT INTO recipes (recipe_category_id, name, summary, ingredients, instructions, preparation_time, yield_description, image_path) VALUES (:category, :name, :summary, :ingredients, :instructions, :preparation_time, :yield_description, :image_path)');
+        $statement = $pdo->prepare('INSERT INTO recipes (product_category_id, name, summary, ingredients, instructions, preparation_time, yield_description, image_path) VALUES (:category, :name, :summary, :ingredients, :instructions, :preparation_time, :yield_description, :image_path)');
         $statement->execute([
             'category' => $categoryId,
             'name' => $name,
@@ -99,11 +99,11 @@ class RecipeController extends BaseController
             'recipes' => [],
         ];
 
-        $query = 'SELECT r.*, c.name AS category_name FROM recipes r LEFT JOIN recipe_categories c ON c.id = r.recipe_category_id ORDER BY COALESCE(c.name, "Sem categoria"), r.name';
+        $query = 'SELECT r.*, c.name AS category_name FROM recipes r LEFT JOIN product_categories c ON c.id = r.product_category_id ORDER BY COALESCE(c.name, "Sem categoria"), r.name';
         $recipes = $pdo->query($query)->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($recipes as $recipe) {
-            $categoryId = $recipe['recipe_category_id'] ? (int) $recipe['recipe_category_id'] : 0;
+            $categoryId = $recipe['product_category_id'] ? (int) $recipe['product_category_id'] : 0;
             $grouped[$categoryId]['recipes'][] = $recipe;
         }
 

@@ -10,7 +10,7 @@ require __DIR__ . '/../layout/header.php';
         <div class="card h-100">
             <div class="card-body">
                 <h5 class="card-title">Cadastrar fornecedor</h5>
-                <form method="post" action="index.php?page=suppliers">
+                <form method="post" action="index.php?page=suppliers" class="form-styled">
                     <div class="mb-3">
                         <label class="form-label" for="supplier_name">Nome</label>
                         <input type="text" class="form-control" id="supplier_name" name="name" required>

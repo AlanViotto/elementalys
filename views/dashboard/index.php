@@ -18,6 +18,15 @@ require __DIR__ . '/../layout/header.php';
     <div class="col-xxl-3 col-md-6">
         <div class="card stat-card h-100">
             <div class="card-body">
+                <div class="stat-icon"><i class="bi bi-journal-text"></i></div>
+                <span class="label">Receitas cadastradas</span>
+                <p class="value mb-0"><?= $stats['recipes'] ?></p>
+            </div>
+        </div>
+    </div>
+    <div class="col-xxl-3 col-md-6">
+        <div class="card stat-card h-100">
+            <div class="card-body">
                 <div class="stat-icon"><i class="bi bi-people-fill"></i></div>
                 <span class="label">Clientes ativos</span>
                 <p class="value mb-0"><?= $stats['customers'] ?></p>
@@ -30,15 +39,6 @@ require __DIR__ . '/../layout/header.php';
                 <div class="stat-icon"><i class="bi bi-truck"></i></div>
                 <span class="label">Fornecedores</span>
                 <p class="value mb-0"><?= $stats['suppliers'] ?></p>
-            </div>
-        </div>
-    </div>
-    <div class="col-xxl-3 col-md-6">
-        <div class="card stat-card h-100">
-            <div class="card-body">
-                <div class="stat-icon"><i class="bi bi-bar-chart"></i></div>
-                <span class="label">Total de vendas</span>
-                <p class="value mb-0"><?= $stats['sales'] ?></p>
             </div>
         </div>
     </div>
@@ -67,7 +67,7 @@ require __DIR__ . '/../layout/header.php';
                         <a class="quick-action-card" href="index.php?page=sales">
                             <span class="icon"><i class="bi bi-arrow-up-right-circle"></i></span>
                             <span>Saídas (vendas)</span>
-                            <small>Registre novas vendas</small>
+                            <small><?= $stats['sales'] ?> vendas registradas</small>
                         </a>
                         <a class="quick-action-card" href="index.php?page=customers">
                             <span class="icon"><i class="bi bi-people"></i></span>
@@ -78,6 +78,11 @@ require __DIR__ . '/../layout/header.php';
                             <span class="icon"><i class="bi bi-truck"></i></span>
                             <span>Fornecedores</span>
                             <small>Cadastre parceiros de compra</small>
+                        </a>
+                        <a class="quick-action-card" href="index.php?page=recipes">
+                            <span class="icon"><i class="bi bi-journal-richtext"></i></span>
+                            <span>Receitas</span>
+                            <small>Organize preparo e insumos</small>
                         </a>
                         <a class="quick-action-card" href="index.php?page=products#low-stock-card">
                             <span class="icon"><i class="bi bi-exclamation-circle"></i></span>

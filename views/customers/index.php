@@ -10,7 +10,7 @@ require __DIR__ . '/../layout/header.php';
         <div class="card h-100">
             <div class="card-body">
                 <h5 class="card-title">Cadastrar cliente</h5>
-                <form method="post" action="index.php?page=customers">
+                <form method="post" action="index.php?page=customers" class="form-styled">
                     <div class="mb-3">
                         <label class="form-label" for="customer_name">Nome</label>
                         <input type="text" class="form-control" id="customer_name" name="name" required>

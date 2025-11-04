@@ -6,7 +6,12 @@ abstract class BaseController
 {
     protected function sanitizeString(?string $value): string
     {
-        return trim(filter_var($value ?? '', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+        $raw = $value ?? '';
+
+        $decoded = htmlspecialchars_decode($raw, ENT_QUOTES | ENT_SUBSTITUTE);
+        $stripped = strip_tags($decoded);
+
+        return trim($stripped);
     }
 
     protected function sanitizeLongText(?string $value): string

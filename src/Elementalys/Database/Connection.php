@@ -12,7 +12,7 @@ class Connection
     public static function getInstance(): PDO
     {
         if (self::$instance === null) {
-            $config = require __DIR__ . '/../../config/config.php';
+            $config = require dirname(__DIR__, 3) . '/config/config.php';
             $db = $config['db'];
 
             $dsn = sprintf('mysql:host=%s;port=%s;dbname=%s;charset=%s', $db['host'], $db['port'], $db['database'], $db['charset']);

@@ -11,7 +11,7 @@ class AuthController extends BaseController
     {
         $pdo = Connection::getInstance();
         $statement = $pdo->prepare('SELECT id, name, password_hash FROM users WHERE email = :email LIMIT 1');
-        $statement->execute(['email' => $this->sanitizeString($email)]);
+        $statement->execute(['email' => $this->sanitizeEmail($email)]);
         $user = $statement->fetch(PDO::FETCH_ASSOC);
 
         if (! $user) {

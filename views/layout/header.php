@@ -19,6 +19,7 @@ $menuItems = [
     'recipes' => ['label' => 'Receitas', 'icon' => 'bi-journal-richtext', 'href' => 'index.php?page=recipes'],
     'supplies' => ['label' => 'Insumos', 'icon' => 'bi-archive', 'href' => 'index.php?page=supplies'],
     'sales' => ['label' => 'Vendas', 'icon' => 'bi-cart-check', 'href' => 'index.php?page=sales'],
+    'reports' => ['label' => 'Relatórios', 'icon' => 'bi-file-earmark-bar-graph', 'href' => 'index.php?page=reports'],
     'customers' => ['label' => 'Clientes', 'icon' => 'bi-people', 'href' => 'index.php?page=customers'],
     'suppliers' => ['label' => 'Fornecedores', 'icon' => 'bi-truck', 'href' => 'index.php?page=suppliers'],
     'settings' => ['label' => 'Configurações', 'icon' => 'bi-gear', 'href' => 'index.php?page=settings'],

@@ -11,6 +11,7 @@ use Elementalys\Controllers\CustomerController;
 use Elementalys\Controllers\DashboardController;
 use Elementalys\Controllers\ProductController;
 use Elementalys\Controllers\RecipeController;
+use Elementalys\Controllers\ReportController;
 use Elementalys\Controllers\SaleController;
 use Elementalys\Controllers\SettingsController;
 use Elementalys\Controllers\SupplierController;
@@ -160,6 +161,21 @@ try {
             $products = $saleController->products();
             $customers = $saleController->customers();
             require __DIR__ . '/../views/sales/index.php';
+            break;
+
+        case 'reports':
+            $reportController = new ReportController();
+            $range = $reportController->normalizeRange($_GET['start'] ?? null, $_GET['end'] ?? null);
+
+            if ($range['hasError']) {
+                $error = $range['message'];
+            }
+
+            $startDate = $range['start'];
+            $endDate = $range['end'];
+            $rangeError = $range['hasError'] ? $range['message'] : null;
+            $reportData = $reportController->build($startDate, $endDate);
+            require __DIR__ . '/../views/reports/index.php';
             break;
 
         case 'settings':

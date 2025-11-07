@@ -104,10 +104,10 @@ require __DIR__ . '/../layout/header.php';
                             <span>Alertas</span>
                             <small>Acompanhe o estoque crítico</small>
                         </a>
-                        <a class="quick-action-card disabled" href="#" aria-disabled="true">
+                        <a class="quick-action-card" href="index.php?page=reports">
                             <span class="icon"><i class="bi bi-file-earmark-bar-graph"></i></span>
                             <span>Relatórios</span>
-                            <small>Relatórios personalizados em breve</small>
+                            <small>Acompanhe desempenho e margens</small>
                         </a>
                     </div>
                 </div>
